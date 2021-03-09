@@ -23,7 +23,7 @@ class CategoryController extends Controller
         return response()->json($categories);
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateCategoryFormRequest $request)
     {
         $category = $this->category->create($request->all());
 
@@ -31,10 +31,10 @@ class CategoryController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreUpdateCategoryFormRequest $request, $id)
     {
         if(!$category = $this->category->find($id))
-            return response()->json(['error', 'categoria não encontrda']);
+            return response()->json(['error', 'categoria não encontrada']);
 
         $category->update($request->all());
 
