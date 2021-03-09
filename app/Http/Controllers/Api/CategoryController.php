@@ -34,11 +34,21 @@ class CategoryController extends Controller
     public function update(StoreUpdateCategoryFormRequest $request, $id)
     {
         if(!$category = $this->category->find($id))
-            return response()->json(['error', 'categoria não encontrada']);
+            return response()->json(['error', 'categoria não encontrada'], 404);
 
         $category->update($request->all());
 
         return response()->json($category);
+    }
+
+    public function destroy($id)
+    {
+        if(!$category = $this->category->find($id))
+            return response()->json(['error', 'categoria não encontrada'], 404);
+        
+        $category->delete();
+
+        return response()->json(['success' =>true], 204);
     }
 
     
